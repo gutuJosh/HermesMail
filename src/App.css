@@ -27,12 +27,11 @@
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+nav h2{display:inline;float:left;}
+nav ul{
+  display:flex;
+  list-style: none;
+}
+nav ul li{
+  padding:10px;
 }
