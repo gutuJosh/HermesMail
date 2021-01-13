@@ -1,0 +1,48 @@
+/****Grid system****/
+//Using a grid-system it makes it easier to place elements on the page.
+//This responsive grid-system has 12 columns, and has a total width of 100%, and will shrink and expand as you resize the browser window.
+//The columns should be wrapped in a <div> class "row"
+[class*="col-"] {
+  float: left;
+  box-sizing: border-box;
+}
+
+.col-one-third {
+  width: 33.33%;
+}
+
+.col-two-thirds {
+  width: 66.66%;
+}
+
+.col-one-half {
+  width: 50%;
+}
+
+.row,
+.col-full {
+  box-sizing: border-box;
+  width: 100%;
+  @include set-offset(1, 4);
+}
+
+.row:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+@media (max-width: $screen-xs-max) {
+  @include set-column-width("xs", "div");
+}
+@media (min-width: $screen-sm-min) {
+  @include set-column-width("sm", "div");
+}
+
+@media (min-width: $screen-md-min) {
+  @include set-column-width("md", "div");
+}
+
+@media (min-width: $screen-lg-min) { 
+  @include set-column-width("lg", "div");
+}

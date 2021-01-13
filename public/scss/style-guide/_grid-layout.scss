@@ -1,0 +1,210 @@
+/****Css Grid Layout****/
+//CSS Grid Layout is the most powerful layout system available in CSS.
+//It is a 2-dimensional system, meaning it can handle both columns and rows.
+//You work with Grid Layout by applying CSS rules both to a parent element (which becomes the Grid Container) and to that elements children (which become Grid Items).
+
+.grid {
+  width: 100%;
+  display: grid;
+  display: -webkit-grid;
+  display: -ms-grid;
+  &.grid-inline {
+    display: inline-grid;
+    display: -webkit-inline-grid;
+    display: -ms-inline-grid;
+  }
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  -webkit-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: $grid-column-gap;
+  grid-row-gap: $grid-row-gap;
+  &.items-top {
+    align-items: top;
+  }
+  &.items-bottom {
+    align-items: bottom;
+  }
+  &.items-middle {
+    align-items: center;
+  }
+  &.items-v-stretch {
+    align-items: stretch;
+  }
+  &.items-left {
+    justify-items: start;
+  }
+  &.items-right {
+    justify-items: end;
+  }
+  &.items-center {
+    justify-items: center;
+  }
+  &.items-h-stretch {
+    justify-items: stretch;
+  }
+  &.align-left {
+    justify-content: start;
+  }
+  &.align-right {
+    justify-content: end;
+  }
+  &.align-center {
+    justify-content: center;
+  }
+  &.align-stretch {
+    justify-content: stretch;
+  }
+  &.v-align-top {
+    align-content: top;
+  }
+  &.v-align-bottom {
+    align-content: bottom;
+  }
+  &.v-align-middle {
+    align-content: center;
+  }
+  &.v-align-stretch {
+    align-content: stretch;
+  }
+  &.v-align-space-between {
+    align-content: space-between;
+  }
+  &.v-align-space-around {
+    align-content: space-around;
+  }
+
+  .subgrid {
+    display: subgrid;
+  }
+
+  .item-full {
+    grid-column-start: 1;
+    grid-column-end: 13;
+  }
+
+  .item-half-left {
+    grid-column-start: 1;
+    grid-column-end: 7;
+  }
+  .item-half-right {
+    grid-column-start: 7;
+    grid-column-end: 13;
+  }
+
+  .item-one-third-left {
+    grid-column-start: 1;
+    grid-column-end: 5;
+  }
+
+  .item-one-third-middle {
+    grid-column-start: 5;
+    grid-column-end: 9;
+  }
+
+  .item-one-third-right {
+    grid-column-start: 9;
+    grid-column-end: 13;
+  }
+
+  .item-two-thirds-left {
+    grid-column-start: 1;
+    grid-column-end: 9;
+  }
+
+  .item-two-thirds-right {
+    grid-column-start: 5;
+    grid-column-end: 13;
+  }
+
+  .item-one-quarter-1 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+
+  .item-one-quarter-2 {
+    grid-column-start: 4;
+    grid-column-end: 7;
+  }
+
+  .item-one-quarter-3 {
+    grid-column-start: 7;
+    grid-column-end: 10;
+  }
+
+  .item-one-quarter-4 {
+    grid-column-start: 10;
+    grid-column-end: 13;
+  }
+  [class*="item-lg-"] {
+    max-width: 100%;
+  }
+
+  /*@media (max-width: $screen-lg-max) {
+    [class*="item-lg-"] {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+    @include grid-items("md");
+  }
+  @media (max-width: $screen-md-max) {
+    [class*="item-md-"] {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+    @include grid-items("sm");
+  }
+
+  @media (max-width: $screen-sm-max) {
+    [class*="item-sm-"] {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+    @include grid-items("xs");
+  }
+
+  @media (min-width: $screen-lg-min) {
+    @include grid-items("lg");
+  }*/ 
+
+  @media (max-width: $screen-xs-max) {
+    @include grid-items("xs");
+  }
+  @media (min-width: $screen-sm-min) {
+     @include grid-items("sm");
+  }
+
+  @media (min-width: $screen-md-min) {
+    @include grid-items("md");
+  }
+
+  @media (min-width: $screen-lg-min) { 
+    @include grid-items("lg");
+  }
+
+}
+
+//container queries
+//used in conjunction with ResizeComponent plugin, located in /helpers
+
+[data-observe-resizes]{
+  &.xs{
+    /*[class*="item-sm-"] {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }*/
+    @include grid-items("xs");
+  }
+  &.sm{
+    /*[class*="item-md-"] {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }*/
+    @include grid-items("sm");
+  }
+  &.md{
+    @include grid-items("md");
+  }
+  &.lg{
+    @include grid-items("lg");
+  }
+
+}

@@ -1,0 +1,142 @@
+.table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin-bottom: 20px;
+
+  &.table-bordered {
+    border-top: 1px solid $light-grey;
+    th,
+    td {
+      border-bottom: 1px solid $light-grey;
+      border-right: 1px solid $light-grey;
+    }
+    th:first-child,
+    td:first-child {
+      border-left: 1px solid $light-grey;
+    }
+    th,
+    td {
+      border-bottom: 1px solid $light-grey;
+      border-right: 1px solid $light-grey;
+    }
+    th:first-child,
+    td:first-child {
+      border-left: 1px solid $light-grey;
+    }
+  }
+  &.table-borderless {
+    th,
+    td {
+      border: none;
+    }
+  }
+  &.table-hover {
+    tr {
+      transition: all 0.3s ease-out;
+    }
+    tr:hover {
+      background-color: $super-light-grey;
+    }
+  }
+  &.zebra-stripes {
+    tr:nth-child(odd) {
+      background-color: $super-light-grey;
+    }
+    thead > tr {
+      background-color: transparent !important;
+    }
+  }
+  tr {
+    &.disabled {
+      @include disabled;
+    }
+  }
+  th {
+    border-bottom: 2px solid $asphalt-grey;
+    text-align: left;
+    padding: 10px;
+    &.vertical-align {
+      vertical-align: middle;
+    }
+  }
+  td {
+    border-top: 1px solid $asphalt-grey;
+    padding: 10px;
+    &.vertical-align {
+      vertical-align: middle;
+    }
+  }
+
+  &.responsive {
+    @media screen and (max-width: $screen-xs-max) {
+      border: none;
+      thead {
+        display: block;
+        float: left;
+        vertical-align: middle;
+        box-sizing: border-box;
+      }
+      th {
+        display: block;
+        vertical-align: bottom;
+        border-bottom: 1px solid $asphalt-grey;
+        border-left: 1px solid $asphalt-grey;
+        &:first-child {
+          border-top: 1px solid $asphalt-grey;
+        }
+      }
+      tbody {
+        display: block;
+        position: relative;
+        width: auto;
+        white-space: nowrap;
+        vertical-align: middle;
+        overflow-x: auto;
+      }
+      tr {
+        display: inline-block;
+        vertical-align: top;
+        &:last-child {
+          td {
+            border-right: 1px solid $asphalt-grey;
+          }
+        }
+      }
+      td {
+        display: block;
+        vertical-align: top;
+        border-bottom: none;
+        border-left: none;
+
+        &:first-child {
+          border-left: none;
+        }
+        &:last-child {
+          border-bottom: 1px solid $asphalt-grey;
+        }
+      }
+    }
+  }
+}
+
+//add a scrolling wrapper for responsive tables
+.table-flip-scroll {
+  width: 100%;
+  max-width: 100%;
+  min-height: 0.01%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  @media screen and (max-width: $screen-xs-max) {
+    .table {
+      max-width: 100%;
+    }
+
+    &:after {
+      clear: both;
+      content: "";
+      display: table;
+    }
+  }
+}

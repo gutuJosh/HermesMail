@@ -1,0 +1,399 @@
+//Alert boxes, media, modals and badges
+
+.alert-label {
+  transition: all 0.3s ease-out;
+  visibility: hidden;
+  opacity: 0;
+  position: relative;
+  &.alert-on {
+    padding: 10px 20px 10px 10px;
+    margin-bottom: 20px;
+    visibility: visible;
+    opacity: 1;
+  }
+  .close {
+    align-items: center;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+  }
+
+  &.default {
+    background-color: $super-light-grey;
+  }
+  &.dark {
+    background-color: $dark-grey;
+    color: $snow;
+  }
+
+  &.info {
+    background-color: $azure;
+    color: $snow;
+    p:before {
+      @include add-icon("\f05a", 12px);
+      position: relative;
+      color: $snow;
+      display: inline;
+      margin-right: 5px;
+    }
+  }
+
+  &.error {
+    background-color: $red;
+    color: $snow;
+    p:before {
+      @include add-icon("\f057", 12px);
+      position: relative;
+      color: $snow;
+      display: inline;
+      margin-right: 5px;
+    }
+  }
+
+  &.warning {
+    background-color: $yellow;
+    color: $snow;
+    p:before {
+      @include add-icon("\f071", 12px);
+      position: relative;
+      color: $snow;
+      display: inline;
+      margin-right: 5px;
+    }
+  }
+
+  &.success {
+    background-color: $green;
+    color: $snow;
+    p:before {
+      @include add-icon("\f058", 12px);
+      position: relative;
+      color: $snow;
+      display: inline;
+      margin-right: 5px;
+    }
+  }
+}
+
+//Mask
+/*masks are used in combination with modals*/
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.4s ease-out;
+  &.dark {
+    background-color: rgba(0, 0, 0, 0.8);
+    .modal {
+      background-color: $snow;
+      color: $asphalt-grey;
+      header {
+        background-color: $light-grey;
+        color: $dark-grey;
+      }
+      .btn-white {
+        background-color: $light-grey;
+      }
+      &.info {
+        background-color: $snow;
+        header {
+          background-color: $azure;
+          color: $snow;
+        }
+        .modal-icon {
+          color: $azure;
+        }
+        .btn-white {
+          background-color: $azure;
+        }
+        .text-info {
+          color: $snow;
+        }
+      }
+      &.warning {
+        background-color: $snow;
+        header {
+          background-color: $yellow;
+          color: $dark-grey;
+        }
+        .modal-icon {
+          color: $yellow;
+        }
+        .btn-white {
+          background-color: $yellow;
+        }
+        .text-warning {
+          color: $dark-grey;
+        }
+        .btn-outline-white {
+          border: 1px solid $yellow;
+          color: $dark-grey;
+        }
+      }
+      &.alert {
+        background-color: $snow;
+        header {
+          background-color: $red;
+          color: $snow;
+        }
+        .modal-icon {
+          color: $red;
+        }
+        .btn-white {
+          background-color: $red;
+        }
+        .text-alert {
+          color: $snow;
+        }
+      }
+      &.success {
+        background-color: $snow;
+        header {
+          background-color: $jade;
+          color: $snow;
+        }
+        .modal-icon {
+          color: $jade;
+        }
+        .btn-white {
+          background-color: $jade;
+        }
+        .text-success {
+          color: $snow;
+        }
+      }
+    }
+  }
+  &.mask-on {
+    visibility: visible;
+    opacity: 1;
+    .modal {
+      transition: all 0.3s ease-out;
+      transition-delay: 0.2s;
+      top: 30px;
+    }
+  }
+}
+
+.modal {
+  width: 100%;
+  max-width: 600px;
+  min-width: 300px;
+  box-sizing: border-box;
+  position: relative;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;
+  transition: all 0.3s ease-out;
+  transition-delay: 0s;
+  &.info {
+    background-color: $azure;
+    color: $snow;
+  }
+  &.warning {
+    background-color: $yellow;
+    color: $snow;
+  }
+  &.alert {
+    background-color: $red;
+    color: $snow;
+  }
+  &.success {
+    background-color: $jade;
+    color: $snow;
+  }
+}
+
+.modal-header {
+  min-height: 40px;
+  line-height: 20px;
+  position: relative;
+  &:after {
+    @include add-icon("\f00d", 14px);
+    color: $snow;
+    cursor: pointer;
+    @include align-right;
+    right: 10px;
+  }
+}
+
+.modal-body,
+.modal-footer {
+  padding: 10px;
+  .btn {
+    margin: 0 5px;
+  }
+}
+.modal-footer {
+  margin-bottom: 20px;
+}
+
+//Labels
+.label {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  font-size: 1.2rem;
+  border: 0.1rem solid transparent;
+  text-align: center;
+  padding: 0.3rem 0.6rem;
+  &:before {
+    @include add-icon("\f00d", "0.8rem");
+    position: absolute;
+    top: 0.4rem;
+    right: 0.5rem;
+    cursor: pointer;
+  }
+}
+.label-default {
+  background-color: $light-grey;
+}
+
+.label-info {
+  background-color: $azure;
+  color: $snow;
+}
+
+.label-success {
+  background-color: $green;
+  color: $snow;
+}
+
+//Tips
+.tip {
+  position: relative;
+  &:before,
+  &:after {
+    position: absolute;
+    left: 50%;
+    opacity: 0;
+    margin-bottom: 0;
+    transition: all 0.25s;
+    bottom: 120%;
+  }
+  &:after {
+    white-space: normal;
+    content: attr(data-tip);
+    display: block;
+    padding: 0.25em 0.5em;
+    background: $deep-grey;
+    color: $snow;
+    pointer-events: none;
+    z-index: 999;
+    transform: translateX(-50%);
+    //width:100%;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    text-align: center;
+    //border-radius:6px;
+  }
+  &:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 8px solid $deep-grey;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    margin-left: -4px;
+    bottom: 100%;
+  }
+}
+
+.tip:hover {
+  &:before,
+  &:after {
+    opacity: 1;
+  }
+}
+
+.tip-top {
+  @include tip(top, after, $dark-grey, $snow);
+  @include tip(top, before, $dark-grey, "");
+  &.info {
+    @include tip(top, after, $azure, $snow);
+    @include tip(top, before, $azure, "");
+  }
+  &.warning {
+    @include tip(top, after, $yellow, $snow);
+    @include tip(top, before, $yellow, "");
+  }
+  &.alert {
+    @include tip(top, after, $red, $snow);
+    @include tip(top, before, $red, "");
+  }
+  &.success {
+    @include tip(top, after, $green, $snow);
+    @include tip(top, before, $green, "");
+  }
+}
+.tip-right {
+  @include tip(right, after, $dark-grey, $snow);
+  @include tip(right, before, $dark-grey, "");
+  &.info {
+    @include tip(right, after, $azure, $snow);
+    @include tip(right, before, $azure, "");
+  }
+  &.warning {
+    @include tip(right, after, $yellow, $snow);
+    @include tip(right, before, $yellow, "");
+  }
+  &.alert {
+    @include tip(right, after, $red, $snow);
+    @include tip(right, before, $red, "");
+  }
+  &.success {
+    @include tip(right, after, $green, $snow);
+    @include tip(right, before, $green, "");
+  }
+}
+.tip-bottom {
+  @include tip(bottom, after, $dark-grey, $snow);
+  @include tip(bottom, before, $dark-grey, "");
+  &.info {
+    @include tip(bottom, after, $azure, $snow);
+    @include tip(bottom, before, $azure, "");
+  }
+  &.warning {
+    @include tip(bottom, after, $yellow, $snow);
+    @include tip(bottom, before, $yellow, "");
+  }
+  &.alert {
+    @include tip(bottom, after, $red, $snow);
+    @include tip(bottom, before, $red, "");
+  }
+  &.success {
+    @include tip(bottom, after, $green, $snow);
+    @include tip(bottom, before, $green, "");
+  }
+}
+.tip-left {
+  @include tip(left, after, $dark-grey, $snow);
+  @include tip(left, before, $dark-grey, "");
+  &.info {
+    @include tip(left, after, $azure, $snow);
+    @include tip(left, before, $azure, "");
+  }
+  &.warning {
+    @include tip(left, after, $yellow, $snow);
+    @include tip(left, before, $yellow, "");
+  }
+  &.alert {
+    @include tip(left, after, $red, $snow);
+    @include tip(left, before, $red, "");
+  }
+  &.success {
+    @include tip(left, after, $green, $snow);
+    @include tip(left, before, $green, "");
+  }
+}

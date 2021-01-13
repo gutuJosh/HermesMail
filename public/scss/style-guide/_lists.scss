@@ -1,0 +1,126 @@
+.list-group {
+  margin-bottom: 5px;
+  border: 1px solid $dirty-snow;
+  li:last-child {
+    border-bottom: none;
+  }
+  li.disabled {
+    @include disabled;
+  }
+}
+
+.list-group > li {
+  padding: 10px 15px;
+  border-bottom: 1px solid $dirty-snow;
+  position: relative;
+  display: block;
+  ul li {
+    padding: 10px 15px;
+  }
+}
+
+.list-group-divided {
+  @extend .list-group;
+  border: none;
+  li {
+    padding: 10px 15px;
+    border-bottom: 1px solid $light-grey;
+    position: relative;
+    display: block;
+    &.disabled {
+      @extend li.disabled;
+    }
+  }
+  & li:last-child {
+    border-bottom: 1px solid $light-grey;
+  }
+}
+
+.list-group-item {
+  //style for li elements
+}
+
+.inline-list {
+  li {
+    display: inline;
+    list-style: none;
+    padding: 10px 15px;
+    position: relative;
+  }
+}
+
+//drop down list
+.drop-down {
+  & > ul {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-out;
+    li {
+      display: block;
+    }
+  }
+  &:hover {
+    & > ul {
+      height: auto;
+      max-height: 1000px;
+      transition: all 0.4s ease-out;
+    }
+  }
+}
+
+//Media
+
+.media {
+  padding: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  box-sizing: border-box;
+  @media (max-width: $screen-xs-max) {
+    flex-direction: column;
+  }
+  @media (max-width: $screen-xs-max) {
+    display: block;
+  }
+}
+
+.media-left {
+  margin-right: 1rem;
+  display: flex;
+  @media (max-width: $screen-md-max) {
+    //width:25%;
+  }
+  @media (max-width: $screen-xs-max) {
+    margin-right: 0;
+    display: block;
+  }
+}
+.media-body {
+  flex: 1;
+  @media (max-width: $screen-md-max) {
+    //width:75%;
+  }
+}
+
+.media-body,
+.media-left,
+.media-right {
+  box-sizing: border-box;
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+  }
+}
+
+.media-right {
+  margin-left: 1rem;
+  display: flex;
+  @media (max-width: $screen-md-max) {
+    display: inherit;
+    margin-left: 0;
+    width: 100%;
+  }
+}

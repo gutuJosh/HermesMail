@@ -1,0 +1,8 @@
+{
+  "Welcome to React": "Welcome to React and react-i18next",
+  "Register": "Sign up",
+  "All the Services you need in One Place": "All the Services you need in One Place",
+  "section": "Searching in section {{- section}}",
+  "searchMessage": "<0>No results!</0> Please try again later!",
+  "userMessagesUnread": "Hello <1>{{name}}</1>, you have 5 unread message. <3>Go to message</3>."
+}

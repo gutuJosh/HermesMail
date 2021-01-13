@@ -1,0 +1,267 @@
+@mixin centered-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin align-left {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+@mixin align-right {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+//genereate columns width in a old-fashion grid & flexbox grid systems
+@mixin set-column-width($column-prefix, $element) {
+  $column-width: 8.33;
+  @for $i from 1 through 12 {
+    $width: $column-width * $i;
+    @if $i % 3 == 0 {
+      $width: round($column-width * $i);
+    } @else {
+      @if $width < round($width) {
+        $width: floor($width) + 0.66;
+      } @else {
+        $width: floor($width) + 0.33;
+      }
+    }
+
+    @if $element == "flex" {
+      $width: $width + "%";
+      .flex-#{$column-prefix}-#{$i} {
+        flex: 0 0 calc(#{$width} - #{$flex-grid-gap});
+        max-width: calc(#{$width} - #{$flex-grid-gap});
+      }
+    } @else {
+      .col-#{$column-prefix}-#{$i} {
+        width: $width + %;
+      }
+    }
+  }
+}
+
+//set margin-left to grid columns
+
+@mixin set-offset($start, $stop) {
+  @for $i from $start through $stop {
+    $margin: 8.33 * $i;
+    @if $i % 3 == 0 {
+      margin: round($margin * $i);
+    } @else {
+      @if $margin < round($margin) {
+        $margin: floor($margin) + 0.66;
+      } @else {
+        $margin: floor($margin) + 0.33;
+      }
+    }
+    .offset-#{$i} {
+      margin-left: $margin + "%";
+    }
+  }
+}
+
+//generate grid items in a css grid layout
+@mixin grid-items($prefix) {
+  $columns: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+
+  @each $item in $columns {
+    $stop: $item + 1;
+    $max-point: 13 - nth($item, 1);
+    @for $i from 1 through $max-point {
+      .item-#{$prefix}-#{nth($item, 1)}-#{$i} {
+        grid-column-start: $i;
+        grid-column-end: $stop;
+      }
+      $stop: $i + ($item + 1);
+    }
+  }
+}
+
+//add an icon :before or :after
+@mixin add-icon($icon, $size) {
+  content: "#{$icon}";
+  display: block;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: $size;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+}
+
+//create a shaded background
+@mixin disabled {
+  cursor: not-allowed;
+  background-image: -moz-repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 3px,
+    #f8f8f7 3px,
+    #f8f8f7 6px
+  );
+  background-image: -webkit-repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 3px,
+    #f8f8f7 3px,
+    #f8f8f7 6px
+  );
+  background-color: $super-light-grey;
+}
+
+//use pseudoclases :before & :after to show a speach bubble
+//when user hover on element
+@mixin tip($type, $position, $bg-color, $text-color) {
+  /*
+      $type= top | right | bottom | left
+      $position = :before | :after
+      $bg-color = hexadecimal | rgba
+      $text-color = hexadecimal | rgba
+   */
+  position: relative;
+
+  @if $position == before {
+    //the arrow
+    &:before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      @if $type == top {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-right: 6px solid transparent;
+        border-top: 6px solid $bg-color;
+        border-bottom: 6px solid transparent;
+        border-left: 6px solid transparent;
+      }
+      @if $type == right {
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        border-right: 6px solid $bg-color;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 6px solid transparent;
+      }
+      @if $type == bottom {
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-right: 6px solid transparent;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid $bg-color;
+        border-left: 6px solid transparent;
+      }
+      @if $type == left {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        border-right: 6px solid transparent;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 6px solid $bg-color;
+      }
+      transition: all 0.2s ease-out;
+      visibility: hidden;
+      opacity: 0;
+    }
+  } //end before
+
+  @if $position == after {
+    //content
+    &:after {
+      content: attr(data-tip);
+      display: block;
+      background-color: $bg-color;
+      padding: 0 10px;
+      font-size: 12px;
+      line-height: 20px;
+      color: $text-color;
+      white-space: nowrap;
+      position: absolute;
+      //max-width: 100%;
+      //word-wrap: break-word;
+      //overflow-wrap: break-word;
+      @if $type == left {
+        top: 50%;
+        right: 100%;
+        transform: translateY(-50%);
+      }
+      @if $type == top {
+        left: 50%;
+        top: -10px;
+        transform: translateX(-50%);
+        box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.3);
+      }
+      @if $type == right {
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%);
+        box-shadow: 1px -1px 2px rgba(0, 0, 0, 0.3);
+      }
+      @if $type == bottom {
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%);
+        box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+      transition: all 0.2s ease-out;
+      visibility: hidden;
+      opacity: 0;
+    }
+  } //end after
+
+  &:hover:before {
+    visibility: visible;
+    opacity: 1;
+    @if $type == top {
+      top: -10px;
+    }
+    @if $type == right {
+      right: -20px;
+    }
+    @if $type == bottom {
+      bottom: -10px;
+    }
+    @if $type == left {
+      left: -10px;
+    }
+  }
+
+  &:hover:after {
+    visibility: visible;
+    opacity: 1;
+    @if $type == top {
+      top: -30px;
+    }
+    @if $type == right {
+      left: calc(100% + 20px);
+    }
+    @if $type == bottom {
+      bottom: -30px;
+    }
+    @if $type == left {
+      right: calc(100% + 10px);
+    }
+  }
+}
+
+//flag icons in LanguageSelector
+@mixin flag-icon($url) {
+  content:url($url);
+  display: inline-block;
+  width: 16px;
+  height:11px;
+  margin-right:5px;
+}

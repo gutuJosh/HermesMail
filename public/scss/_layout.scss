@@ -1,0 +1,193 @@
+html, body {min-height:100%;}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    color:$deep-grey;
+    @media (max-width: $screen-xs-max) {
+      overflow-x: hidden;
+     	background-color:$blue;
+    }
+}
+.app-container{
+    width:100%;
+    height: 100vh;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    &.nav-closed{
+      .app-nav{
+        width:60px;
+      }
+      .close-menu{
+		     visibility: hidden;
+      }
+      .new-message-btn span{
+        display:none;
+      }
+      .new-message-btn{
+        width:50px;
+        height:50px;
+        margin:20px 5px;
+        i{
+          display:inline;
+          @include centered-absolute;
+        }
+      }
+    }
+    @media (max-width: $screen-xs-max) {
+        width:calc(100% + 250px);//vw + .app-nav width
+        margin-left:-250px;//.app-nav width
+        transition: margin 0.4s ease-out;
+        &.nav-closed{
+           margin-left:0px;
+           .app-nav{
+            width:250px;
+           }
+           .app-main{
+             border-radius:15px;
+             transform: scale(0.95);
+             transform-origin: center center; 
+           }
+           #logo{
+            left:10px;
+            transform:translate(0, -50%);
+          }
+          .close-menu{
+           visibility: visible!important;
+          }
+          .new-message-btn span{
+            display:inline;
+          }
+          .new-message-btn{
+            margin:20px;
+            width: calc(100% - 40px);
+          }
+        }
+    }
+}
+.app-nav{
+    flex:0 0 auto;
+    width: 250px;
+    background-color: $snow;
+    will-change: width;
+    transition: width 0.3s ease-out;
+    overflow-x: hidden;
+    z-index: 1;
+    box-shadow: 10px 26px 26px 0 rgba(0, 0, 0, 0.1);
+}
+
+.logo-holder{
+    position: relative;
+    height:60px;
+    border-bottom:1px solid #f5f6f8;
+    border-right:1px solid #f5f6f8;
+}
+
+#logo{
+  width:40px;
+  height:40px;
+  display: inline-block;
+  position: relative;
+  top:50%;
+  left:10px;
+  transform: translateY(-50%);
+  background: url('/images/logo-blue.png') center center no-repeat transparent;
+  background-size:contain;
+}
+
+
+.app-main{
+  flex: 1 1 0%;
+  background-color:$washed-grey;
+  display:flex;
+  flex-flow: column;
+  height: 100vh;
+  overflow:hidden;
+  @media (max-width: $screen-xs-max) {
+    width:calc(100% - 250px);
+    overflow-x:hidden;
+    transition: transform 0.6s ease-out;
+    &.read-message  .app-body{
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.app-header{
+  background-color: $snow;
+  border-bottom:1px solid $washed-grey;
+  height:60px;
+  box-sizing: border-box;
+  padding:10px;
+  nav{
+    height:100%;
+    a{
+      line-height: 40px;
+      color:$blue;
+      align-self: center;
+ 	  }
+	}
+}
+
+.app-body{
+  width:100%;
+  contain: content;
+  display:flex;
+  min-height: calc(100% - 60px);
+  @media (max-width: $screen-xs-max) {
+    width: 200%;
+    transition: transform 0.6s ease-out;
+  }
+}
+
+.app-content{
+  flex: 1 1 0%;
+  min-width: 320px;
+  contain: content;
+  height:100%;
+  @media (max-width: $screen-xs-max) {
+    flex:1;
+    width: 50%;
+  }
+}
+
+
+.app-sidebar{
+  width:100%;
+  min-width:360px;
+  flex:0 1 auto;
+  border-left:1px solid rgba(0,0,0,.075);
+  will-change: width;
+  background-color: #fff;
+  position:relative;
+  overflow:hidden;
+  @media (max-width: $screen-xs-max) {
+    flex:1;
+    width: 50%;
+  }
+}
+
+.resizer{
+  width:30px;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0px;
+  cursor:ew-resize;
+  z-index: 10;
+  @media (max-width: $screen-xs-max) {
+    display:none;
+  }
+}
+.resizer:before{
+  content:'';
+  display:block;
+  position: sticky;
+  top:50vh;
+  background-image: linear-gradient(90deg,#888,#888 1px,transparent 2px,transparent 5px);
+  background-size: 4px;
+  width: 10px;
+  height: 30px;
+  margin-left:0px;
+}

@@ -16,11 +16,13 @@ const Cart = (props) => {
         </li>
     ))}
     </ul>
+    <p><strong>Current language is: {props.languageProps.languageState}</strong></p>
    </React.Fragment>
   );
 };
 const mapStateToProps = state => ({
-    basketProps : state.basketState
+    basketProps : state.basketState,
+    languageProps : state.languageState
 })
 
 export default connect(mapStateToProps, { removeBasket })(Cart)

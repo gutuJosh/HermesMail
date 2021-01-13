@@ -1,0 +1,112 @@
+#profileImage{
+    display:none;
+}
+
+#profileImage:checked ~ .profile-image{
+  max-height: 300px;
+  visibility: visible;
+  transition: max-height 0.4s ease-out;
+  transition-delay: 0s;
+}
+
+label[for="profileImage"]{
+    img{
+        width:32px;
+        border-radius: 50%;
+    }
+}
+
+.profile-image{
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    width: 240px;
+    position: absolute;
+    top:40px;
+    right:10px;
+    transition: visibility 0.3s ease-out 0.3s, max-height 0.4s ease-out;
+    box-shadow:0 26px 21px 0 rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    background-color:$snow;
+    figure{
+        display: block;
+        padding:20px 20px 0 20px;
+        margin-top:20px;
+    }
+    img{
+        width:96px;
+        border-radius: 50%;
+        display: block;
+        margin:0 auto;
+        margin-bottom:10px;
+    }
+}
+
+
+.language-selector{
+    margin:0 10px;
+    .placeholder{
+        text-transform: uppercase;
+        &[data-content="EN"]:before{
+            @include flag-icon('/images/flag-en.png');
+        }
+        &[data-content="IT"]:before{
+            @include flag-icon('/images/flag-it.png');
+        }
+    }
+    .custom-selector{
+        min-width: 75px;
+        background-color: $super-light-grey;
+        border-radius:3px;
+        .select-menu{
+            border-radius:3px;
+            overflow:hidden!important;
+        }
+    }
+    .custom-option:checked ~ label{
+        background-color: transparent;
+    }
+    .custom-option[value="en"] ~ label::before{
+       @include flag-icon('/images/flag-en.png');
+      
+    }
+    .custom-option[value="it"] ~ label::before{
+        @include flag-icon('/images/flag-it.png');
+    }
+    .custom-option:checked ~ label::after{
+        display:none;
+    }
+}
+
+.app-sidebar-header{
+    border-bottom:1px solid $washed-grey;
+    background-color: $snow;
+    height:40px;
+    .flex-item{
+        height:40px;
+        line-height: 40px;
+        position: relative;
+        &:nth-child(1), &:nth-child(3){
+            max-width:40px;
+            color:$asphalt-grey;
+            text-align:center;
+        }
+        &:nth-child(1){
+            display:none;
+        }
+    }
+    #singleMessageOptions ~ ul{
+        top:40px;
+        width:200px;
+        right:0;
+        left:initial;
+        li{
+            text-align:left;
+            line-height:20px;
+        }
+    }
+
+}
+.app-sidebar-header:hover ~ .resizer{
+    display:none;
+}

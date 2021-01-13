@@ -1,30 +1,49 @@
 import React from 'react';
-import { Route, Switch, useHistory } from "react-router-dom";
-import './App.css';
+import { Route, Switch, useHistory} from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './store.js'
-import Home from "./pages/Home";
-import Cart from "./pages/Cart";
-import NavBar from './components/NavBar.js';
+import AppLayout from "./components/AppLayout";
+import ReadEmail from "./pages/ReadEmail";
+import ComposeEmail from "./pages/ComposeEmail";
+import AppNav from './components/AppNav.js';
+import AppHeader from './components/AppHeader.js';
 
-function App() {
+
+const App = (props) => {
+
+  const history = useHistory();
+  
   return (
     <Provider store={store}>
-     <div className="App">
-      <header>
-       <NavBar />
-      </header>
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>
-      </Switch>
-     </div>
+     <AppLayout history={history}>
+
+      <AppNav history={history}/>
+
+      <section className="app-main">
+       
+       <AppHeader history={history}/>
+      
+       <div className="app-body">
+        <Switch>
+          <Route path="/" exact>
+            <ReadEmail history={history}/>
+          </Route>
+          <Route path="/read/:section">
+            <ReadEmail history={history}/>
+          </Route>
+          <Route path="/new-message">
+            <ComposeEmail />
+          </Route>
+        </Switch>
+       </div>
+
+      </section>
+
+     </AppLayout>
     </Provider>
   );
-}
+ }
+
+
 
 export default App;

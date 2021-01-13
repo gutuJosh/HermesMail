@@ -1,0 +1,944 @@
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  &:before {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .input-error,
+  .input-warning,
+  .input-success,
+  .input-hint {
+    padding-right: 2rem;
+  }
+  .input-hint ~ .info-sign {
+    @include align-right;
+    right: 1rem;
+  }
+  .input-hint:focus ~ .info-sign {
+    color: $azure;
+  }
+
+  //show simbols
+  .text-warning:after {
+    content: "\f071";
+  }
+  .text-error:after {
+    content: "\f00d";
+  }
+  .text-success:after {
+    content: "\f00c";
+  }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+input[type="password"],
+input[type="file"],
+input[type="url"] {
+  position: relative;
+  font-size: 1.4rem;
+  width: 100%;
+  height: 3.4rem;
+  padding: 0.3rem 1.2rem;
+  background-color: transparent;
+  background-clip: padding-box;
+  outline: none;
+  border: none;
+  transition: border-color 0.3s ease-out;
+  z-index: 1;
+  &.input-default,
+  .input-hint,
+  .input-file {
+    border: 1px solid $light-grey;
+    &:focus {
+      border-color: $azure;
+    }
+  }
+  &.input-success {
+    color: $dark-green;
+    border: 1px solid $green;
+  }
+  &.input-error {
+    color: $red;
+    border: 1px solid $red;
+  }
+  &.input-warning {
+    color: $gold-yellow;
+    border: 1px solid $yellow;
+  }
+  &.input-disabled {
+    border: 1px solid $light-grey;
+    background-color: $super-light-grey;
+    cursor: not-allowed;
+  }
+  &.input-readonly {
+    border: 1px solid $light-grey;
+    background-color: $super-light-grey;
+    cursor: copy;
+  }
+  &.input-error ~ span.text-error,
+  &.input-warning ~ span.text-warning,
+  &.input-success ~ span.text-success,
+  &.input-hint:focus ~ span.text-hint,
+  &.input-readonly:focus ~ .text-disabled,
+  &.input-disabled:hover ~ .text-disabled {
+    display: inline-block;
+    opacity: 1;
+  }
+  &.border-none {
+    border: none;
+  }
+}
+
+//validation
+form {
+  .text-hint,
+  .text-error,
+  .text-alert,
+  .text-warning,
+  .text-success,
+  .text-disabled {
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    &:after {
+      display: block;
+      position: absolute;
+      top: 3.5rem;
+      right: 1rem;
+      z-index: 0;
+      font-family: "Font Awesome 5 Free";
+      font-size: 1rem;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      font-weight: 900;
+    }
+  }
+}
+
+//custom file input
+
+.basic-upload-input {
+  position: relative;
+  max-height: 3.4rem;
+  .placeholder {
+    border: 1px solid $asphalt-grey;
+    width: 100%;
+    height: 3.4rem;
+    font-weight: normal;
+    z-index: 1;
+    margin: 0;
+  }
+  input[type="file"] {
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  .input-file ~ .text-default,
+  .placeholder span {
+    @include align-left;
+    top: 1.8rem;
+    left: 1.2rem;
+  }
+  .placeholder:before {
+    @include add-icon("\f574", "1rem");
+    @include align-right;
+    right: 1rem;
+  }
+  .placeholder span {
+    color: $middle-grey;
+    opacity: 0.6;
+    font-weight: normal;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 4rem;
+  }
+  .input-file ~ .thumb-icon {
+    @include align-right;
+    top: 1.8rem;
+    right: 1rem;
+  }
+
+  .text-error:after,
+  .text-alert:after,
+  .text-warning:after,
+  .text-success:after {
+    content: "";
+    opacity: 0;
+  }
+  .text-default:after {
+    @extend .text-error:after;
+    color: $middle-grey;
+  }
+}
+
+.custom-uploader {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 160px;
+  padding: 10px;
+  border: 2px dashed $asphalt-grey;
+  box-sizing: border-box;
+  position: relative;
+  background-color: transparent;
+  z-index: 1;
+
+  input {
+    display: none;
+  }
+  label {
+    @include centered-absolute;
+    z-index: 0;
+  }
+  img {
+    max-width: 25%;
+    z-index: -1;
+  }
+}
+
+.input-lg {
+  font-size: 18px;
+  height: 46px;
+  border: 1px solid $asphalt-grey;
+  padding: 5px;
+}
+
+.input-small {
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border: 1px solid $asphalt-grey;
+}
+
+.input-with-icon {
+  position: relative;
+  &.icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+  }
+  input {
+    padding-left: 40px;
+  }
+}
+
+//select
+.select-box {
+  position: relative;
+}
+select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  height: 36px;
+  padding: 3px;
+  font-size: 14px;
+  border: 1px solid $light-grey;
+  box-shadow: none;
+  width: 100%;
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+select ~ .arrow:after,
+select ~ .arrow2:after {
+  content: "\f0d7";
+  display: block;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 1rem;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  @include align-right;
+  right: 10px;
+  z-index: 0;
+  color: $asphalt-grey;
+}
+select ~ .arrow2:after {
+  transform: none;
+  top: 40px;
+}
+.selector-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+.custom-selector {
+  position: relative;
+  @extend select;
+  z-index: initial;
+  height: auto;
+  min-height: 36px;
+  padding: 0 1rem;
+  transition: height 0.3s ease-out;
+  input {
+    display: none;
+  }
+  .filter-options {
+    display: block;
+    background-color: transparent;
+    padding: 0;
+  }
+  .select-menu {
+    position: absolute;
+    top: 3.4rem;
+    left: -0.1rem;
+    width: calc(100% + 0.2rem);
+    background-color: $snow;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    z-index: 100;
+  }
+  &.filter-on .select-menu {
+    margin-top: 12px;
+  }
+  .placeholder {
+    font-size: 1.4rem;
+    line-height: 34px;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .placeholder:after {
+    @include add-icon("\f0d7", 1rem);
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    z-index: 0;
+    color: $asphalt-grey;
+  }
+  .select-options {
+    height: auto;
+    border: none;
+    padding: 0 5px;
+    li {
+      position: relative;
+      padding: 0;
+      &.hidden {
+        display: none;
+      }
+    }
+    label {
+      display: block;
+      font-size: 1.4rem;
+      line-height: 1.4rem;
+      padding: 10px;
+      transition: background-color 0.3s ease-out;
+      &:hover {
+        background-color: $super-light-grey;
+      }
+    }
+  }
+  .open-select-list:checked ~ .select-menu {
+    transition: max-height 0.3s ease-out;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid $light-grey;
+    border-top: none;
+    box-shadow: 0 26px 21px 0 rgba(0, 0, 0, 0.1);
+  }
+  &.alert ~ span.text-alert,
+  &.warning ~ span.text-warning,
+  &.success ~ span.text-success {
+    display: inline-block;
+    opacity: 1;
+  }
+}
+
+.custom-option:checked ~ label {
+  background-color: $super-light-grey;
+  &:after {
+    @include add-icon("\f00c", 1rem);
+    @include align-right;
+    right: 10px;
+    color: $asphalt-grey;
+  }
+}
+
+.selected-label {
+  display: inline-block;
+  background-color: $super-light-grey;
+  padding: 5px 15px 5px 10px;
+  position: relative;
+  margin: 10px 5px 0 0;
+  &:after {
+    @include add-icon("\f00d", 1rem);
+    @include align-right;
+    right: 5px;
+  }
+}
+
+//switchers
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  &.large {
+    width: 60px;
+    height: 34px;
+  }
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset -1px 1px 3px rgba(0, 0, 0, 0.5);
+    background-color: $light-grey;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    &.round {
+      border-radius: 34px;
+    }
+
+    &.round:before {
+      border-radius: 50%;
+    }
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: $snow;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+  }
+  &.large .slider:before {
+    height: 26px;
+    width: 26px;
+  }
+
+  input:checked + .slider {
+    background-color: $asphalt-grey;
+    box-shadow: inset -1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  &.info input:checked + .slider {
+    background-color: $azure;
+  }
+
+  &.warning input:checked + .slider {
+    background-color: $yellow;
+  }
+
+  &.error input:checked + .slider {
+    background-color: $red;
+  }
+
+  &.success input:checked + .slider {
+    background-color: $green;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px $light-grey;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+}
+
+//textarea
+textarea {
+  width: 100%;
+  min-height: 100px;
+  //border:1px solid $asphalt-grey;
+  display: block;
+  padding: 1rem;
+  box-sizing: border-box;
+  resize: vertical;
+  @extend pre;
+}
+
+//Butons
+.btn {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  border: none;
+  box-sizing: border-box;
+  background: none;
+  font-size: 1.2rem;
+  padding: 1.2rem;
+  min-height: 4rem;
+  padding: 0.6rem 1.2rem;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius:3px;
+}
+
+.btn-small {
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  padding: 0.6rem;
+  min-height: 2rem;
+}
+
+.btn-large {
+  font-size: 1.6rem;
+  padding: 1.4rem;
+  min-height: 6rem;
+}
+
+.btn-dark {
+  @extend .btn;
+  background-color: $middle-grey;
+  color: $snow;
+}
+
+.btn-info {
+  @extend .btn;
+  background-color: $azure;
+  color: $snow;
+}
+
+.btn-alert {
+  @extend .btn;
+  background-color: $red;
+  color: $snow;
+}
+.btn-success {
+  @extend .btn;
+  background-color: $green;
+  color: $snow;
+}
+.btn-superlight-grey {
+  @extend .btn;
+  background-color: $super-light-grey;
+  color: $middle-grey;
+}
+
+.btn-default {
+  @extend .btn;
+  background-color: $light-grey;
+  color: $middle-grey;
+}
+
+.btn-warning {
+  @extend .btn;
+  background-color: $yellow;
+  color: $middle-grey;
+}
+
+.btn-white {
+  @extend .btn;
+  background-color: $snow;
+  $color: $asphalt-grey;
+}
+
+.btn-yellow {
+  @extend .btn;
+  background-color: $yellow;
+  $color: $asphalt-grey;
+}
+
+.btn-light-purple {
+  @extend .btn;
+  background-color: $light-purple;
+}
+//btn outline
+.btn-outline-white {
+  @extend .btn;
+  border: 1px solid $snow;
+  color: $snow;
+}
+
+.btn-outline-info {
+  @extend .btn;
+  border: 1px solid $azure;
+  color: $azure;
+}
+
+.btn-outline-alert {
+  @extend .btn;
+  border: 1px solid $red;
+  background-color: transparent;
+  color: $red;
+}
+
+.btn-outline-warning {
+  @extend .btn;
+  border: 1px solid $yellow;
+  background-color: transparent;
+  color: $yellow;
+}
+
+.btn-outline-success {
+  @extend .btn;
+  border: 1px solid $green;
+  background-color: transparent;
+  color: $green;
+}
+
+//btn-group
+.btn-group {
+  @extend .btn;
+  display: inline-block;
+  position: relative;
+  background-color: $light-grey;
+  color: $middle-grey;
+  padding-right: 3rem;
+  &.info {
+    background-color: $azure;
+    & > label {
+      color: $snow;
+    }
+    .dropdown-menu {
+      border-color: $azure;
+      li:hover {
+        background-color: $azure;
+        label {
+          color: $snow;
+        }
+      }
+    }
+  }
+  &.warning {
+    background-color: $yellow;
+    & > label {
+      color: $dark-grey;
+    }
+    .dropdown-menu {
+      border-color: $yellow;
+      li:hover {
+        background-color: $yellow;
+        label {
+          color: $dark-grey;
+        }
+      }
+    }
+  }
+  &.error {
+    background-color: $red;
+    & > label {
+      color: $snow;
+    }
+    .dropdown-menu {
+      border-color: $red;
+      li:hover {
+        background-color: $red;
+        label {
+          color: $snow;
+        }
+      }
+    }
+  }
+  &.success {
+    background-color: $green;
+    & > label {
+      color: $snow;
+    }
+    .dropdown-menu {
+      border-color: $green;
+      li:hover {
+        background-color: $green;
+        label {
+          color: $snow;
+        }
+      }
+    }
+  }
+  &.dark {
+    background-color: $dark-grey;
+    & > label {
+      color: $snow;
+    }
+    .dropdown-menu {
+      li:hover {
+        background-color: $dark-grey;
+        label {
+          color: $snow;
+        }
+      }
+    }
+  }
+  input {
+    display: none;
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    &.top {
+      top: inherit;
+      bottom: calc(100% + 5px);
+    }
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25);
+    border: 1px solid $light-grey;
+    background-color: $snow;
+    min-width: 100%;
+    width: calc(100% + 1rem);
+    z-index: 10;
+    li {
+      width: 100%;
+      list-style: none;
+      padding: 0.6rem 0;
+      transition: background 0.3s ease-out;
+      color: $asphalt-grey;
+      &:hover {
+        background-color: $super-light-grey;
+      }
+      label {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  .open-list:checked ~ .dropdown-menu {
+    display: block;
+  }
+}
+
+.btn-group > label {
+  line-height: 3.2rem;
+  &:before {
+    @include add-icon("\f0dd", "1rem");
+    @include align-right;
+    top: 18px;
+    right: 1rem;
+  }
+}
+
+.btn-full {
+  display: inline-block;
+  width: 100%;
+}
+
+//checkbox & radio
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 24px;
+  cursor: pointer;
+  font-weight: normal;
+  line-height: 18px;
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: transparent;
+    border: 1px solid $asphalt-grey;
+    &.info {
+      border: 1px solid $azure;
+    }
+    &.error {
+      border: 1px solid $red;
+    }
+    &.warning {
+      border: 1px solid $yellow;
+    }
+    &.success {
+      border: 1px solid $green;
+    }
+  }
+  &.large {
+    line-height: 30px;
+    padding-left: 40px;
+    .checkmark {
+      width: 30px;
+      height: 30px;
+    }
+    input:checked ~ .checkmark:after {
+      width: 6px;
+      height: 14px;
+      left: 12px;
+      top: 4px;
+    }
+  }
+  &.small {
+    padding-left: 25px;
+    .checkmark {
+      width: 15px;
+      height: 15px;
+    }
+    input:checked ~ .checkmark:after {
+      width: 3px;
+      height: 6px;
+      top: 2px;
+      left: 5px;
+    }
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  input:checked ~ .checkmark {
+    background-color: $asphalt-grey;
+  }
+  input:checked ~ .checkmark.info {
+    background-color: $azure;
+  }
+  input:checked ~ .checkmark.error {
+    background-color: $red;
+  }
+  input:checked ~ .checkmark.warning {
+    background-color: $yellow;
+  }
+  input:checked ~ .checkmark.success {
+    background-color: $green;
+  }
+  input:checked ~ .checkmark:after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    display: block;
+    left: 5px;
+    top: 1px;
+    width: 3px;
+    height: 8px;
+    border-width: 0 3px 3px 0;
+    border-color: $snow;
+    border-style: solid;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  input:checked ~ .checkmark:after {
+    border-right: 3px solid $snow;
+    border-bottom: 3px solid $snow;
+  }
+  input:checked ~ .checkmark.warning:after {
+    border-right: 3px solid $snow;
+    border-bottom: 3px solid $snow;
+  }
+}
+
+.custom-checkbox ~ .text-error,
+.custom-checkbox ~ .text-alert {
+  display: none;
+  padding-left: 10px;
+}
+
+.custom-checkbox.error ~ .text-error,
+.custom-checkbox.alert ~ .text-alert,
+.custom-checkbox.warning ~ .text-warning {
+  display: inline-block;
+  opacity: 1;
+}
+
+//radio button
+.custom-radio-btn {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-weight: normal;
+  line-height: 22px;
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: $asphalt-grey;
+    border: 1px solid $asphalt-grey;
+  }
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  input:checked ~ .checkmark.info {
+    background-color: $azure;
+    border-color: $azure;
+  }
+  input:checked ~ .checkmark.error {
+    background-color: $red;
+    border-color: $red;
+  }
+  input:checked ~ .checkmark.warning {
+    background-color: $yellow;
+    border-color: $yellow;
+  }
+  input:checked ~ .checkmark.success {
+    background-color: $green;
+    border-color: $green;
+  }
+  input:checked ~ .checkmark:after {
+    display: block;
+    left: 50%;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: $snow;
+    transform: translate(-50%, -50%);
+  }
+  &.large {
+    line-height: 32px;
+    padding-left: 40px;
+    .checkmark {
+      width: 30px;
+      height: 30px;
+    }
+    input:checked ~ .checkmark:after {
+      width: 10px;
+      height: 10px;
+    }
+  }
+  &.small {
+    line-height: 18px;
+    padding-left: 25px;
+    .checkmark {
+      width: 14px;
+      height: 14px;
+    }
+    input:checked ~ .checkmark:after {
+      width: 6px;
+      height: 6px;
+    }
+  }
+}
