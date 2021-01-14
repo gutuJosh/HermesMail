@@ -13,7 +13,11 @@ export function authenticate() {
     return window.gapi.auth2.getAuthInstance()
     .signIn({scope: GmailAuthorization.scopes})
     .then( loadClient(),
-          (err) => { console.error("Error signing in", err); }
+          (err) => { 
+              console.error("Error signing in", err);
+              handleSignout();
+              window.location.reload();
+             }
         );
 }
 
@@ -43,7 +47,9 @@ export function getUserProfile() {
             // Handle the results here (response.result has the parsed body).
             console.log("Response", response);
           },
-          function(err) { console.error("Execute error", err); });
+          function(err) { 
+              console.error("Execute error", err);
+         });
 }
 
  /**
@@ -83,7 +89,7 @@ export function gmailLoadApi() {
  /**
  *  Sign out the user.
  */
-export function handleSignout(event) {
+export function handleSignout() {
    window.gapi.auth2.getAuthInstance().signOut();
 }
 

@@ -1,0 +1,188 @@
+#cn-button{
+    display:none;
+}
+
+label[for="cn-button"]{
+    display:block;
+    width:100px;
+    height: 100px;
+    border-radius:50%;
+    text-align: center;
+    background-color:#3E82FF;
+    color:#fff;
+    position: absolute;
+    bottom:-100px;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    cursor: pointer;
+    box-shadow:0 -4px 6px 2px rgba(0,0,0, 0.1);
+    transition: transform 0.3s ease-out;
+}
+
+.app-sidebar:hover label[for="cn-button"]{
+    transform: translate(-50%,-50%);
+}
+
+label[for="cn-button"] i{
+    font-size:20px;
+    position: relative;
+    top:20px;
+    transition: transform 0.3s ease-out;
+}
+
+ #cn-button:checked ~ label{
+     color:#3E82FF;
+    background-color:#fff;
+    transform: translate(-50%,-50%);
+ }
+
+ #cn-button:checked ~ label i{
+     transform: rotate(135deg);
+ }
+
+    .circular-menu-wrapper {
+            font-size:1em;
+              width: 26em;
+              height: 26em;
+              overflow: hidden;
+              position: absolute;
+              z-index: 10;
+              bottom: -13em;
+              left: 50%;
+              border-radius: 50%;
+              margin-left: -13em;
+              transition: transform .3s ease;
+              transform: scale(0.1);
+              visibility: hidden;
+    }
+
+    .app-sidebar:hover .circular-menu-wrapper{
+       visibility: visible;
+  }
+
+    #cn-button:checked ~ .circular-menu-wrapper{
+        transform: scale(1);
+        visibility: visible;
+    }
+
+    .circular-menu-overlay{
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.4s ease-out;
+    }
+
+    .circular-menu-overlay.resizing{
+        background-color:transparent;
+        width:100%;
+        height:100%;
+        position: absolute;
+        top:0;
+        left:0;
+        z-index: 5;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    #cn-button:checked ~ .circular-menu-overlay{
+        background-color:rgba(255,255,266, 0.7);
+        width:100%;
+        height:100%;
+        position: absolute;
+        top:0;
+        left:0;
+        z-index: 1;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .circular-menu-wrapper ul{
+        position: absolute;
+        top: 0;
+        left: 50%;
+    }
+
+
+ .circular-menu-wrapper li {
+      position: absolute;
+      font-size: 1.5em;
+      width: 10em;
+      height: 10em;
+      transform-origin: 100% 100%;/*bottom-right*/
+      overflow: hidden;
+      left: 50%;
+      top: 50%;
+      margin-top: -1.3em;
+      margin-left: -10em;
+      transition: border .3s ease;
+    
+ }
+
+ .circular-menu-wrapper li a {
+      display: block;
+      font-size: 1.18em;
+      height: 14.5em;
+      width: 14.5em;
+      position: absolute;
+      bottom: -7.25em;
+      right: -7.25em;
+      border-radius: 50%;
+      text-decoration: none;
+      color: #fff;
+      padding-top: 1.8em;
+      text-align: center;
+      transform: skew(-50deg) rotate(-70deg) scale(1);
+      transition: opacity 0.3s, color 0.3s;
+}
+
+
+.circular-menu-wrapper li a span {
+      font-size: 1.1em;
+      opacity: 1;
+}
+
+/* for a central angle x, the list items must be skewed by 90-x degrees
+    in our case x=40deg so skew angle is 50deg
+    items should be rotated by x, minus (sum of angles - 180)2s (for this demo) */
+
+    .circular-menu-wrapper li:first-child {
+      transform: rotate(-5deg) skew(50deg);
+    }
+
+    .circular-menu-wrapper li:nth-child(2) {
+      transform: rotate(30deg) skew(50deg);
+    }
+    .circular-menu-wrapper li:nth-child(3) {
+      transform: rotate(70deg) skew(50deg)
+    }
+
+    .circular-menu-wrapper li:nth-child(4) {
+      transform: rotate(110deg) skew(50deg);
+    }
+
+    .circular-menu-wrapper li:nth-child(5) {
+      transform: rotate(145deg) skew(50deg);
+    }
+
+    .circular-menu-wrapper li:nth-child(odd) a {
+      background-color:$azure;
+    }
+
+     .circular-menu-wrapper li:nth-child(even) a {
+      background-color: #5b97ff;
+    }
+
+    /* active style */
+    .circular-menu-wrapper li.active a {
+      background-color: $red;
+    }
+
+    /* hover style */
+    .circular-menu-wrapper li:not(.active) a:hover,
+    .circular-menu-wrapper li:not(.active) a:active,
+    .circular-menu-wrapper li:not(.active) a:focus {
+      background-color: #71a4fc;
+    }
+    .circular-menu-wrapper li:not(.active) a:focus {
+      position: absolute; /* fix the "displacement" bug in webkit browsers when using tab key */
+    }

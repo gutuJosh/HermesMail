@@ -5,6 +5,7 @@ import MessageBox from '../components/ui/MessageBox.js'
 import AppContentHeader from '../components/AppContentHeader.js';
 import AppSidebarHeader from '../components/AppSidebarHeader.js';
 import ResizeComponent from "../helpers/ResizeComponents";
+import CircularMenu from '../components/ui/CircularMenu.js';
 import { getParent } from "../helpers/Dom";
 import Store from '../helpers/Storage.js';
 import { listMessages } from '../config/gmailApi.v2';
@@ -18,10 +19,13 @@ class ReadEmail extends React.Component {
     super(props);
     this.state = {
       section : this.props.layoutProps.layoutState.currentPage,
-      pageToken : false
+      pageToken : false,
+      message: false
     };
     this.loadMessages = this.loadMessages.bind(this);
     this.getHeader = this.getHeader.bind(this);
+    this.readMessage = this.readMessage.bind(this);
+    this.getBody = this.getBody.bind(this);
   }
 
 
@@ -95,6 +99,7 @@ class ReadEmail extends React.Component {
                   info.date = this.getHeader(item.payload.headers, 'Date');
                   info.from = this.getHeader(item.payload.headers, 'From');
                   info.subject = this.getHeader(item.payload.headers, 'Subject');
+                  info.payload = item.payload;
                   emailData.push(info);
                }   
             });
@@ -135,7 +140,28 @@ class ReadEmail extends React.Component {
         return;
       }
       li.classList.add('active');
+      //get message id
       const msgId = li.dataset.id;
+      const getMessage = this.state.msglist.filter( item => item.id === msgId); //get the right message from yhe list
+
+      const ifr = document.querySelector('#message-container');
+      ifr.srcdoc = this.getBody(getMessage[0].payload);//inject message body into dom
+
+      //update message label in session
+      try{
+        const getMessages = JSON.parse(Store.getSession('messages'));
+        const label = this.state.section.toLowerCase();
+        getMessages[label].forEach( item => {
+          if(item.id === msgId && item.labelIds. includes('UNREAD')){
+              item.labelIds.splice(item.labelIds.indexOf('UNREAD'), 1);
+              document.querySelector('.message-list li.active .flex-item .flex .subject-container p').classList.remove('unread');
+          }
+        });
+        Store.setSession('messages', JSON.stringify(getMessages));
+      }catch(e){
+        console.log(e.message);
+      }
+
     }
 
   }
@@ -148,6 +174,38 @@ class ReadEmail extends React.Component {
       }
     });
     return header;
+  }
+
+  getBody(message) {
+    let encodedBody = '';
+    if(typeof message.parts === 'undefined')
+    {
+      encodedBody = message.body.data;
+    }
+    else
+    {
+      encodedBody = this.getHTMLPart(message.parts);
+    }
+    encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+    return decodeURIComponent(escape(window.atob(encodedBody)));
+  }
+
+  getHTMLPart(arr) {
+    for(var x = 0; x <= arr.length; x++)
+    {
+      if(typeof arr[x].parts === 'undefined')
+      {
+        if(arr[x].mimeType === 'text/html')
+        {
+          return arr[x].body.data;
+        }
+      }
+      else
+      {
+        return this.getHTMLPart(arr[x].parts);
+      }
+    }
+    return '';
   }
 
 
@@ -168,6 +226,8 @@ class ReadEmail extends React.Component {
       <section className="app-sidebar" style={this.props.layoutProps.layoutState.appSidebar}>
         <AppSidebarHeader subject="Mail subject here"/>
         <Resizer/>
+        <iframe id="message-container" class="message-container" srcdoc="<p>Loading...</p>"></iframe>
+        <CircularMenu/>
       </section>
     </React.Fragment>
     );

@@ -5929,6 +5929,248 @@ label[for="profileImage"] img {
   font-size: 3rem;
 }
 
+.message-container {
+  border: none;
+  width: 100%;
+  height: calc(100% - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #848484 #dfdfdd;
+}
+
+.message-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.message-container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.message-container::-webkit-scrollbar-thumb {
+  background: #848484;
+}
+
+.message-container::-webkit-scrollbar-thumb:window-inactive {
+  background: #848484;
+}
+
+#cn-button {
+  display: none;
+}
+
+label[for="cn-button"] {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #3E82FF;
+  color: #fff;
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  z-index: 20;
+  cursor: pointer;
+  -webkit-box-shadow: 0 -4px 6px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 -4px 6px 2px rgba(0, 0, 0, 0.1);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+}
+
+.app-sidebar:hover label[for="cn-button"] {
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+label[for="cn-button"] i {
+  font-size: 20px;
+  position: relative;
+  top: 20px;
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+}
+
+#cn-button:checked ~ label {
+  color: #3E82FF;
+  background-color: #fff;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#cn-button:checked ~ label i {
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+}
+
+.circular-menu-wrapper {
+  font-size: 1em;
+  width: 26em;
+  height: 26em;
+  overflow: hidden;
+  position: absolute;
+  z-index: 10;
+  bottom: -13em;
+  left: 50%;
+  border-radius: 50%;
+  margin-left: -13em;
+  -webkit-transition: -webkit-transform .3s ease;
+  transition: -webkit-transform .3s ease;
+  transition: transform .3s ease;
+  transition: transform .3s ease, -webkit-transform .3s ease;
+  -webkit-transform: scale(0.1);
+          transform: scale(0.1);
+  visibility: hidden;
+}
+
+.app-sidebar:hover .circular-menu-wrapper {
+  visibility: visible;
+}
+
+#cn-button:checked ~ .circular-menu-wrapper {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  visibility: visible;
+}
+
+.circular-menu-overlay {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s ease-out;
+  transition: opacity 0.4s ease-out;
+}
+
+.circular-menu-overlay.resizing {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  visibility: visible;
+  opacity: 1;
+}
+
+#cn-button:checked ~ .circular-menu-overlay {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+}
+
+.circular-menu-wrapper ul {
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+
+.circular-menu-wrapper li {
+  position: absolute;
+  font-size: 1.5em;
+  width: 10em;
+  height: 10em;
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+  /*bottom-right*/
+  overflow: hidden;
+  left: 50%;
+  top: 50%;
+  margin-top: -1.3em;
+  margin-left: -10em;
+  -webkit-transition: border .3s ease;
+  transition: border .3s ease;
+}
+
+.circular-menu-wrapper li a {
+  display: block;
+  font-size: 1.18em;
+  height: 14.5em;
+  width: 14.5em;
+  position: absolute;
+  bottom: -7.25em;
+  right: -7.25em;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #fff;
+  padding-top: 1.8em;
+  text-align: center;
+  -webkit-transform: skew(-50deg) rotate(-70deg) scale(1);
+          transform: skew(-50deg) rotate(-70deg) scale(1);
+  -webkit-transition: opacity 0.3s, color 0.3s;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.circular-menu-wrapper li a span {
+  font-size: 1.1em;
+  opacity: 1;
+}
+
+/* for a central angle x, the list items must be skewed by 90-x degrees
+    in our case x=40deg so skew angle is 50deg
+    items should be rotated by x, minus (sum of angles - 180)2s (for this demo) */
+.circular-menu-wrapper li:first-child {
+  -webkit-transform: rotate(-5deg) skew(50deg);
+          transform: rotate(-5deg) skew(50deg);
+}
+
+.circular-menu-wrapper li:nth-child(2) {
+  -webkit-transform: rotate(30deg) skew(50deg);
+          transform: rotate(30deg) skew(50deg);
+}
+
+.circular-menu-wrapper li:nth-child(3) {
+  -webkit-transform: rotate(70deg) skew(50deg);
+          transform: rotate(70deg) skew(50deg);
+}
+
+.circular-menu-wrapper li:nth-child(4) {
+  -webkit-transform: rotate(110deg) skew(50deg);
+          transform: rotate(110deg) skew(50deg);
+}
+
+.circular-menu-wrapper li:nth-child(5) {
+  -webkit-transform: rotate(145deg) skew(50deg);
+          transform: rotate(145deg) skew(50deg);
+}
+
+.circular-menu-wrapper li:nth-child(odd) a {
+  background-color: #3E82FF;
+}
+
+.circular-menu-wrapper li:nth-child(even) a {
+  background-color: #5b97ff;
+}
+
+/* active style */
+.circular-menu-wrapper li.active a {
+  background-color: #fe5e3a;
+}
+
+/* hover style */
+.circular-menu-wrapper li:not(.active) a:hover,
+.circular-menu-wrapper li:not(.active) a:active,
+.circular-menu-wrapper li:not(.active) a:focus {
+  background-color: #71a4fc;
+}
+
+.circular-menu-wrapper li:not(.active) a:focus {
+  position: absolute;
+  /* fix the "displacement" bug in webkit browsers when using tab key */
+}
+
 .app-container.anonymous {
   width: 100%;
   margin-left: 0;

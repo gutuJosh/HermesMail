@@ -5,7 +5,7 @@ import { Translation } from 'react-i18next';
 const AppSidebarHeader = (props) => {
 
   return (
-    <header className="app-sidebar-header">
+    <header className="app-sidebar-header"  data-observe-resizes data-breakpoints='{"xs":"479","sm":"480","md":"790","lg":"992"}'>
      <nav className="flex">
        <div className="flex-item flex-middle pad-x-10">
        <Translation>{(t, { i18n }) =>  <a href="/" title={t('Back')} className="pointer">

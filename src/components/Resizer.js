@@ -7,7 +7,7 @@ const resize = () => {
   return new Promise((resolve) => {   
     const menuWidth = document.querySelector('.app-nav').offsetWidth;
     const preview = 360;
-   //document.querySelector('.circular-menu-overlay').classList.add('resizing')
+    document.querySelector('.circular-menu-overlay').classList.add('resizing');
     window.onmousemove = (event) => {
         event.preventDefault();
          let size = window.innerWidth - event.pageX;
@@ -21,7 +21,7 @@ const resize = () => {
 
          const resizer = document.querySelector('.app-sidebar');
          if(resizer !== null){
-           //document.querySelector('.circular-menu-overlay').classList.remove('resizing');
+           document.querySelector('.circular-menu-overlay').classList.remove('resizing');
            resolve(resizer.offsetWidth);
          }
 
@@ -36,6 +36,7 @@ const startResize = () => {
   return new Promise( (resolve) => {   
        const menuWidth = document.querySelector('.app-nav').offsetWidth;
        const preview = 360;
+       document.querySelector('.circular-menu-overlay').classList.add('resizing');
 
        document.querySelector('.resizer').addEventListener('touchmove', (e) =>{
           e.preventDefault();
@@ -51,7 +52,7 @@ const startResize = () => {
        document.querySelector('.resizer').addEventListener('touchend', () =>{
           const resizer = document.querySelector('.app-sidebar');
           if(resizer !== null){
-           //document.querySelector('.circular-menu-overlay').classList.remove('resizing');
+           document.querySelector('.circular-menu-overlay').classList.remove('resizing');
            resolve(resizer.offsetWidth);
          }
 
