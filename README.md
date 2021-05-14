@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+First of all install redux by running: 
+
+### npm install redux react-redux react-thunk redux-devtools-extension
+
+After that create the store (store.js) and after that the reducers(/reducers/index.js)
+finally create the actions (/actions/addActions.js)
+
 ## Available Scripts
 
 In the project directory, you can run:
